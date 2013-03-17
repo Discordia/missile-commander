@@ -1,14 +1,8 @@
-/*
- * Luftwaffe.java
- *
- * Created on February 11, 2005, 10:47 PM
- */
+package com.sjodahl.game.missile.game.missle;
 
-package discordia.game.missle;
-
-import discordia.world.CollisionVisitor;
-import discordia.world.GameObject;
-import discordia.world.GameObjectStub;
+import com.sjodahl.game.missile.world.CollisionVisitor;
+import com.sjodahl.game.missile.world.GameObject;
+import com.sjodahl.game.missile.world.GameObjectStub;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -16,9 +10,11 @@ import java.awt.geom.Point2D;
 
 /**
  * Antiaircraft defence, the german way Luftwaffe.
- * @author Robert Sjödahl
+ *
+ * @author Robert SjÃ¶dahl
  */
-public class LuftWaffe extends GameObjectStub implements CollisionVisitor {
+public class LuftWaffe extends GameObjectStub implements CollisionVisitor
+{
     
     /**
      * Luftwaffe explosion.
@@ -55,9 +51,9 @@ public class LuftWaffe extends GameObjectStub implements CollisionVisitor {
     }
     
     /**
-     * The game objecty has collided with another one.
+     * The game object has collided with another one.
      *
-     * @param the other game object this one has collided with.
+     * @param visitor the other game object this one has collided with.
      */
     public void collidedWith(CollisionVisitor visitor) {
         visitor.collidedWithLuftWaffe(this);
@@ -91,21 +87,12 @@ public class LuftWaffe extends GameObjectStub implements CollisionVisitor {
         }
     }
     
-    /**
-     *
-     */
     public void collidedWithLuftWaffe(GameObject go) {
     }
     
-    /**
-     *
-     */
-    public void collidedWithCity(GameObject go) { 
+    public void collidedWithCity(GameObject go) {
     }
-    
-    /**
-     *
-     */
+
     public void collidedWithGround(GameObject go) {
     }
 }

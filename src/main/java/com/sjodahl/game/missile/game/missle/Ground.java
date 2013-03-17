@@ -1,23 +1,18 @@
-/*
- * Ground.java
- *
- * Created on February 15, 2005, 6:27 PM
- */
+package com.sjodahl.game.missile.game.missle;
 
-package discordia.game.missle;
-
-import discordia.world.CollisionVisitor;
-import discordia.world.GameObject;
-import discordia.world.GameObjectStub;
+import com.sjodahl.game.missile.world.CollisionVisitor;
+import com.sjodahl.game.missile.world.GameObject;
+import com.sjodahl.game.missile.world.GameObjectStub;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.geom.Point2D;
 
 /**
  *
- * @author Robert Sjödahl
+ * @author Robert SjÃ¶dahl
  */
-public class Ground extends GameObjectStub implements CollisionVisitor {
+public class Ground extends GameObjectStub implements CollisionVisitor
+{
     
     /**
      *
@@ -50,7 +45,7 @@ public class Ground extends GameObjectStub implements CollisionVisitor {
     /**
      * Tell the game object to draw itself to the screen.
      *
-     *@param the widnow Graphics2D.
+     *@param graphics the window's Graphics2D.
      */
     public void draw(Graphics graphics) {
         
@@ -80,26 +75,14 @@ public class Ground extends GameObjectStub implements CollisionVisitor {
             missile.explode();
         }
     }
-    
-    /**
-     *
-     */
+
     public void collidedWithLuftWaffe(GameObject go) {
-        
     }
-    
-    /**
-     *
-     */
+
     public void collidedWithCity(GameObject go) {
-        
     }
-    
-    /**
-     *
-     */
+
     public void collidedWithGround(GameObject go) {
-        
     }
     
 }

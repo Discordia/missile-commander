@@ -4,31 +4,32 @@
  * Created on February 11, 2005, 10:10 PM
  */
 
-package discordia.world;
+package com.sjodahl.game.missile.world;
 
 import java.awt.Graphics;
 import java.util.*;
 
 /**
  * World manager, manages our GameObject:s
- * @author Robert Sjödahl
+ *
+ * @author Robert SjÃ¶dahl
  */
 public class WorldManager {
     
     /**
      * Vector of GameObject:s, that represents our world.
      */
-    private Vector objectList;
+    private Vector<GameObject> objectList;
     
     /**
      * Creates a new instance of WorldManager
      */
     public WorldManager() {
-        objectList = new Vector();
+        objectList = new Vector<GameObject>();
     }
     
     /**
-     * Add a game obejct to the world
+     * Add a game object to the world
      */
     public void addGameObject(GameObject go) {
         GameObject gameObject = (GameObject) go.clone();
@@ -36,14 +37,14 @@ public class WorldManager {
     }
     
     /**
-     * Remove a gameobejct from the world.
+     * Remove a game object from the world.
      */
     public void removeGameObject(GameObject go) {
         objectList.remove(go);
     }
     
     /**
-     * Updates the world, iterates through all game obejcts
+     * Updates the world, iterates through all game objects
      * and calls their update function.
      */
     public void update(long elapsedTime) {
@@ -58,22 +59,22 @@ public class WorldManager {
                 go.update(elapsedTime);
         }
         
-        /* Test for collisons betwenn game objects */
-        CollisonTest();
+        /* Test for collisions between game objects */
+        collisionTest();
     }
     
     /**
      * Test objects for collision against each other.
      */
-    private void CollisonTest() {
+    private void collisionTest() {
         int i = 1;
-        Iterator iter = objectList.iterator();
+        Iterator iterator = objectList.iterator();
         
-        while(iter.hasNext()) {
-            CollisionVisitor visitor = (CollisionVisitor) iter.next();
+        while(iterator.hasNext()) {
+            CollisionVisitor visitor = (CollisionVisitor) iterator.next();
             
             for (int j = i; j < objectList.size(); j++) {
-                GameObject go = (GameObject) objectList.get(j);
+                GameObject go = objectList.get(j);
                 go.collidedWith(visitor);
             }
             
@@ -82,16 +83,15 @@ public class WorldManager {
     }
     
     /**
-     * Draw the world, iterates through the game obejcts 
+     * Draw the world, iterates through the game objects
      * stored in the world and calls their draw function.
      */
     public void draw(Graphics graphics) {
-        Iterator iter = objectList.iterator();
+        Iterator iterator = objectList.iterator();
         
-        while(iter.hasNext()) {
-            GameObject go = (GameObject) iter.next();
+        while(iterator.hasNext()) {
+            GameObject go = (GameObject) iterator.next();
             go.draw(graphics);
         }
     }
-    
 }

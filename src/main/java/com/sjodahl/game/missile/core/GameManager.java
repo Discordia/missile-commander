@@ -1,23 +1,15 @@
-/*
- * GameManager.java
- *
- * Created on February 11, 2005, 10:09 PM
- */
+package com.sjodahl.game.missile.core;
 
-package discordia.core;
+import com.sjodahl.game.missile.world.WorldManager;
 
-import discordia.world.WorldManager;
-import java.awt.Color;
-import java.awt.DisplayMode;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
-import javax.swing.JFrame;
 
 
 /**
  *
- * @author Robert Sjödahl
+ * @author Robert SjÃ¶dahl
  */
 public abstract class GameManager {
     
@@ -45,10 +37,10 @@ public abstract class GameManager {
     /**
      * BufferStrategy for double buffering.
      */
-    BufferStrategy bufferStrategy;
+    private BufferStrategy bufferStrategy;
     
     /**
-     * WolrdManager holds our world/scene.
+     * WorldManager holds our world/scene.
      */
     protected WorldManager worldManager;
     
@@ -138,12 +130,12 @@ public abstract class GameManager {
     public abstract void onInit();
     
     /**
-     * Update method should be overriden by games that extends the GameManager.
+     * Update method should be overridden by games that extends the GameManager.
      */
     public abstract void update(long elapsedTime);
     
     /**
-     * Draw method should be overriden by games that extends the GameManager.
+     * Draw method should be overridden by games that extends the GameManager.
      */
     public abstract void draw(Graphics graphics);
     
@@ -151,5 +143,4 @@ public abstract class GameManager {
      * Method that specific game managers should override to make destruction.
      */
     public abstract void onDestroy();
-    
 }

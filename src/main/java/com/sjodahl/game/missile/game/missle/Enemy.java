@@ -1,10 +1,4 @@
-/*
- * Enemy.java
- *
- * Created on February 15, 2005, 4:36 PM
- */
-
-package discordia.game.missle;
+package com.sjodahl.game.missile.game.missle;
 
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
@@ -12,7 +6,7 @@ import java.util.Random;
 
 /**
  *
- * @author Robert Sjödahl
+ * @author Robert SjÃ¶dahl
  */
 public class Enemy {
     
@@ -35,7 +29,7 @@ public class Enemy {
     }
     
     /**
-     * generate a new mssile to send against the palyers towns.
+     * generate a new missile to send against the players towns.
      * Random speed, origin and direction.
      */
     public Missile generateNewMissile() {

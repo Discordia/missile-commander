@@ -1,26 +1,23 @@
-/*
- * Missile.java
- *
- * Created on February 11, 2005, 10:23 PM
- */
+package com.sjodahl.game.missile.game.missle;
 
-package discordia.game.missle;
-
-import discordia.world.*;
+import com.sjodahl.game.missile.world.CollisionVisitor;
+import com.sjodahl.game.missile.world.GameObject;
+import com.sjodahl.game.missile.world.GameObjectStub;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
 
 /**
  *
- * @author Robert Sjödahl
+ * @author Robert SjÃ¶dahl
  */
-public class Missile extends GameObjectStub implements CollisionVisitor {
+public class Missile extends GameObjectStub implements CollisionVisitor
+{
     
     /**
      *
      */
-    private final int DEFAULT_SPEED = 6;
+    private static final int DEFAULT_SPEED = 6;
     
     /**
      * Explosion for when the missile hits something.
@@ -86,7 +83,7 @@ public class Missile extends GameObjectStub implements CollisionVisitor {
     }
     
     /**
-     * Tell visitor that it has collided with a msiile.
+     * Tell visitor that it has collided with a missile.
      */
     public void collidedWith(CollisionVisitor visitor) {
         visitor.collidedWithMissile(this);
@@ -132,7 +129,7 @@ public class Missile extends GameObjectStub implements CollisionVisitor {
     }
     
     /**
-     * AMke the missile expode.
+     * AMke the missile explode.
      */
     public void explode() {
         if (explosion == null) {

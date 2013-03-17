@@ -4,11 +4,11 @@
  * Created on February 11, 2005, 10:10 PM
  */
 
-package discordia.game.missle;
+package com.sjodahl.game.missile.game.missle;
 
-import discordia.core.GameManager;
-import discordia.core.InputManager;
-import discordia.world.WorldManager;
+import com.sjodahl.game.missile.core.GameManager;
+import com.sjodahl.game.missile.core.InputManager;
+import com.sjodahl.game.missile.world.WorldManager;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -19,7 +19,7 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author Robert Sjödahl
+ * @author Robert SjÃ¶dahl
  */
 public class MissileCommander extends GameManager {
     
@@ -50,14 +50,14 @@ public class MissileCommander extends GameManager {
     }
     
     /**
-     * Initilazation method.
+     * Initialization method.
      */
     public void onInit() {
         inputManager = new InputManager(screen);
         worldManager = new WorldManager();
         enemy = new Enemy(new Dimension(800, 700));
         
-        // Add citys
+        // Add cities
         worldManager.addGameObject(new City(new Point2D.Double(100, 700)));
         worldManager.addGameObject(new City(new Point2D.Double(260, 700)));
         worldManager.addGameObject(new City(new Point2D.Double(420, 700)));
@@ -94,12 +94,7 @@ public class MissileCommander extends GameManager {
         
         worldManager.draw(graphics);
     }
-    
-    /**
-     * 
-     */
+
     public void onDestroy() {
-        
     }
-    
 }

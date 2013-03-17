@@ -4,7 +4,7 @@
  * Created on February 12, 2005, 12:58 AM
  */
 
-package discordia.world;
+package com.sjodahl.game.missile.world;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -12,7 +12,7 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author Robert Sjödahl
+ * @author Robert SjÃ¶dahl
  */
 public abstract class GameObjectStub implements GameObject {
     
@@ -27,7 +27,7 @@ public abstract class GameObjectStub implements GameObject {
     protected Point2D.Double position;
     
     /**
-     * Variable that tells if the obejct is dead.
+     * Variable that tells if the object is dead.
      */
     protected boolean dead;
     
@@ -41,7 +41,7 @@ public abstract class GameObjectStub implements GameObject {
     }
     
     /**
-     * Get the bounding volume of the game objet, for collision tests.
+     * Get the bounding volume of the game object, for collision tests.
      */
     public Rectangle getBoundingVolume() {
         return boundingVolume;
@@ -55,7 +55,7 @@ public abstract class GameObjectStub implements GameObject {
     }
     
     /**
-     * Tells wheter a game obejct is dead, that is should
+     * Tells whether a game object is dead, that is should
      * be removed from the game.
      */
     public boolean isDead() {
@@ -74,7 +74,7 @@ public abstract class GameObjectStub implements GameObject {
     
     /**
      * Tell the game object to draw itself to the screen.
-     * @param the widnow Graphics2D.
+     * @param graphics the window's Graphics2D.
      */
     public abstract void draw(Graphics graphics);
     

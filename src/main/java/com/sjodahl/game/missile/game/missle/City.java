@@ -1,27 +1,18 @@
-/*
- * City.java
- *
- * Created on February 11, 2005, 10:24 PM
- */
+package com.sjodahl.game.missile.game.missle;
 
-package discordia.game.missle;
+import com.sjodahl.game.missile.world.CollisionVisitor;
+import com.sjodahl.game.missile.world.GameObject;
+import com.sjodahl.game.missile.world.GameObjectStub;
 
-import discordia.world.CollisionVisitor;
-import discordia.world.GameObject;
-import discordia.world.GameObjectStub;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**
  *
- * @author Robert Sjödahl
+ * @author Robert SjÃ¶dahl
  */
-public class City extends GameObjectStub implements CollisionVisitor {
+public class City extends GameObjectStub implements CollisionVisitor
+{
     
     /**
      * Default city height.
@@ -67,25 +58,28 @@ public class City extends GameObjectStub implements CollisionVisitor {
      */
     public void draw(Graphics graphics) {
         graphics.setColor(Color.GRAY);
+
         int diff = citySize.height - citySize.width;
-        int posx = (int) position.x;
-        int posy = (int) position.y;
-        int xcoord[] = {posx, posx, posx + citySize.width/2, posx  + citySize.width, posx + citySize.width};
-        int ycoord[] = {posy, posy - citySize.height + diff, posy - citySize.height, posy - citySize.height + diff, posy};
-        graphics.fillPolygon(new Polygon(xcoord, ycoord, 5));
+        int x = (int) position.x;
+        int y = (int) position.y;
+
+        int xCoord[] = {x, x, x + citySize.width/2, x  + citySize.width, x + citySize.width};
+        int yCoord[] = {y, y - citySize.height + diff, y - citySize.height, y - citySize.height + diff, y};
+
+        graphics.fillPolygon(new Polygon(xCoord, yCoord, 5));
     }
     
     /**
      * The game object has collided with another one.
      *
-     * @param the other game objects Collsion visitor.
+     * @param visitor the game objects Collision visitor.
      */
     public void collidedWith(CollisionVisitor visitor) {
         visitor.collidedWithCity(this);
     }
     
     /**
-     *
+     *                                                                                   isitor
      */
     public Object clone() {
         GameObject city = new City(this.getPosition());
@@ -100,7 +94,7 @@ public class City extends GameObjectStub implements CollisionVisitor {
     }
     
     /**
-     * Destory citry, because it has been hit.
+     * Destroy city, because it has been hit.
      */
     public void destroy() {
         dead = true;
@@ -116,26 +110,13 @@ public class City extends GameObjectStub implements CollisionVisitor {
             destroy();
         }
     }
-    
-    /**
-     *
-     */
+
     public void collidedWithLuftWaffe(GameObject go) {
-        
     }
     
-    /**
-     *
-     */
     public void collidedWithCity(GameObject go) {
-        
     }
-    
-    /**
-     *
-     */
+
     public void collidedWithGround(GameObject go) {
-        
     }
-    
 }

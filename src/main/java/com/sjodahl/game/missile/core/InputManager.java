@@ -1,10 +1,4 @@
-/*
- * InputManager.java
- *
- * Created on February 11, 2005, 10:09 PM
- */
-
-package discordia.core;
+package com.sjodahl.game.missile.core;
 
 import java.awt.Component;
 import java.awt.Point;
@@ -14,17 +8,13 @@ import javax.swing.event.MouseInputAdapter;
 /**
  * InputManager listens for input. Could be much more advanced than it is
  * at the moment, but this works for what we need for missile commander.
- * @author Robert Sjödahl
+ *
+ * @author Robert SjÃ¶dahl
  */
 public class InputManager extends MouseInputAdapter {
-    
+
     /**
-     * Component the imput manager listens til.
-     */
-    private Component component;
-    
-    /**
-     * Boolean that tells us if the first mousebutton is down.
+     * Boolean that tells us if the first mouse button is down.
      */
     private boolean mouseDown;
     
@@ -36,16 +26,15 @@ public class InputManager extends MouseInputAdapter {
     /**
      * Creates a new instance of InputManager
      */
-    public InputManager(Component comp) {
-        component = comp;
-        comp.addMouseListener(this);
-        comp.addMouseMotionListener(this);
+    public InputManager(Component component) {
+        component.addMouseListener(this);
+        component.addMouseMotionListener(this);
         mouseDown = false;
-        comp.setFocusTraversalKeysEnabled(false);
+        component.setFocusTraversalKeysEnabled(false);
     }
     
     /**
-     * Tells wheter the first mouse button is down or not.
+     * Tells whether the first mouse button is down or not.
      */
     public boolean isMouseDown() {
         if (mouseDown) {
@@ -64,7 +53,7 @@ public class InputManager extends MouseInputAdapter {
     }
     
     /**
-     * Invoced when the mouse has been pressed in the window.
+     * Invoked when the mouse has been pressed in the window.
      */
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1)

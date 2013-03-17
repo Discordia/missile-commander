@@ -1,10 +1,4 @@
-/*
- * Explosion.java
- *
- * Created on February 11, 2005, 11:49 PM
- */
-
-package discordia.game.missle;
+package com.sjodahl.game.missile.game.missle;
 
 import java.awt.Graphics;
 
@@ -12,12 +6,12 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author Robert Sjödahl
+ * @author Robert SjÃ¶dahl
  */
 public class Explosion {
     
     /**
-     * Constant, default explosion radius in pixles.
+     * Constant, default explosion radius in pixels.
      */
     public static final double DEFAULT_EXPLOSION_RADIUS = 20;
     
@@ -46,7 +40,7 @@ public class Explosion {
     }
     
     /**
-     * Updates the explsosion, that is it's radius will expand.
+     * Updates the explosion, that is it's radius will expand.
      */
     public void update(long elapsedTime) {
         if (currentRadius < explosionRadius)
@@ -56,7 +50,7 @@ public class Explosion {
     /**
      * Draws the explosion
      *
-     * @param the graphics which the explosion should be drawn to.
+     * @param graphics the graphics object which the explosion should be drawn to.
      */
     public void draw(Graphics graphics) {
         graphics.fillOval((int)(position.x - currentRadius), (int)(position.y - currentRadius), (int) currentRadius*2, (int) currentRadius*2);
@@ -78,7 +72,7 @@ public class Explosion {
     }
     
     /**
-     * Check wheter the explosion is over.
+     * Check whether the explosion is over.
      *
      * @return true if the explosion is over, false otherwise.
      */
