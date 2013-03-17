@@ -1,6 +1,6 @@
 package com.sjodahl.game.missile;
 
-import com.sjodahl.game.world.CollisionVisitor;
+import com.sjodahl.game.missile.collision.MissileCommanderCollisionVisitor;
 import com.sjodahl.game.world.GameObject;
 
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public class City extends GameObject implements CollisionVisitor
+public class City extends GameObject<MissileCommanderCollisionVisitor> implements MissileCommanderCollisionVisitor
 {
     
     /**
@@ -24,25 +24,25 @@ public class City extends GameObject implements CollisionVisitor
     public static final int DEFAULT_CITY_WIDTH = 40;
     
     /**
-     *
+     * The city size
      */
     private Dimension citySize;
     
     /**
-     * Creates a new instance of City
+     * Creates a new instance of City with default size
      */
     public City(Point2D.Double pos) {
-        super(pos);
-        citySize = new Dimension(DEFAULT_CITY_WIDTH, DEFAULT_CITY_HEIGHT);
-        calcBoundingVolume();
+        this(pos, new Dimension(DEFAULT_CITY_WIDTH, DEFAULT_CITY_HEIGHT));
     }
     
     /**
-     *
+     * Creates a new instance of City
      */
     public City(Point2D.Double pos, Dimension size) {
         super(pos);
+
         citySize = new Dimension(size);
+        calcBoundingVolume();
     }
     
     /**
@@ -59,6 +59,8 @@ public class City extends GameObject implements CollisionVisitor
         graphics.setColor(Color.GRAY);
 
         int diff = citySize.height - citySize.width;
+
+        Point2D.Double position = getPosition();
         int x = (int) position.x;
         int y = (int) position.y;
 
@@ -73,41 +75,41 @@ public class City extends GameObject implements CollisionVisitor
      *
      * @param visitor the game objects Collision visitor.
      */
-    public void collidedWith(CollisionVisitor visitor) {
-        visitor.collidedWithCity(this);
+    public void collision(MissileCommanderCollisionVisitor visitor) {
+        visitor.collidedWith(this);
     }
     
     /**
      *
      */
     public void calcBoundingVolume() {
-        boundingVolume.setBounds((int) position.x, (int) position.y, citySize.width, citySize.height);
+        Point2D.Double position = getPosition();
+
+        setBoundingVolume((int) position.x, (int) position.y, citySize.width, citySize.height);
     }
     
     /**
      * Destroy city, because it has been hit.
      */
     public void destroy() {
-        dead = true;
+        setDead();
     }
     
     /**
      *
+     * @param missile the Missile that the City collided with
      */
-    public void collidedWithMissile(GameObject go) {
-        if (go.getBoundingVolume().intersects(getBoundingVolume())) {
-            Missile missile = (Missile) go;
-            missile.explode();
-            destroy();
-        }
+    public void collidedWith(Missile missile) {
+        missile.explode();
+        destroy();
     }
 
-    public void collidedWithLuftWaffe(GameObject go) {
+    public void collidedWith(LuftWaffe luftWaffe) {
     }
     
-    public void collidedWithCity(GameObject go) {
+    public void collidedWith(City city) {
     }
 
-    public void collidedWithGround(GameObject go) {
+    public void collidedWith(Ground ground) {
     }
 }

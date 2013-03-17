@@ -1,6 +1,6 @@
 package com.sjodahl.game.missile;
 
-import com.sjodahl.game.world.CollisionVisitor;
+import com.sjodahl.game.missile.collision.MissileCommanderCollisionVisitor;
 import com.sjodahl.game.world.GameObject;
 
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public class Ground extends GameObject implements CollisionVisitor
+public class Ground extends GameObject<MissileCommanderCollisionVisitor> implements MissileCommanderCollisionVisitor
 {
     
     /**
@@ -31,7 +31,8 @@ public class Ground extends GameObject implements CollisionVisitor
      * Calculate the objects bounding volume.
      */
     protected void calcBoundingVolume() {
-        boundingVolume.setBounds((int)position.x, (int)position.y, (int)position.x + size.width, (int)position.y - size.height);
+        Point2D.Double position = getPosition();
+        setBoundingVolume((int) position.x, (int) position.y, (int) position.x + size.width, (int) position.y - size.height);
     }
     
     /**
@@ -53,27 +54,24 @@ public class Ground extends GameObject implements CollisionVisitor
     /**
      *
      */
-    public  void collidedWith(CollisionVisitor visitor) {
-        visitor.collidedWithGround(this);
+    public  void collision(MissileCommanderCollisionVisitor visitor) {
+        visitor.collidedWith(this);
     }
     
     /**
-     *
+     * @param missile the Missile that the Ground collided with
      */
-    public void collidedWithMissile(GameObject go) {
-        if (go.getBoundingVolume().intersects(getBoundingVolume())) {
-            Missile missile = (Missile) go;
-            missile.explode();
-        }
+    public void collidedWith(Missile missile) {
+        missile.explode();
     }
 
-    public void collidedWithLuftWaffe(GameObject go) {
+    public void collidedWith(LuftWaffe luftWaffe) {
     }
 
-    public void collidedWithCity(GameObject go) {
+    public void collidedWith(City city) {
     }
 
-    public void collidedWithGround(GameObject go) {
+    public void collidedWith(Ground ground) {
     }
     
 }

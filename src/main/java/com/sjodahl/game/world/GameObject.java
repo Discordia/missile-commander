@@ -9,30 +9,58 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public abstract class GameObject {
+public abstract class GameObject<Visitor extends CollisionVisitor> implements Collidable<Visitor> {
 
     /**
      * The game objects bounding volume;
      */
-    protected Rectangle boundingVolume;
+    private Rectangle boundingVolume;
 
     /**
      * The game objects position
      */
-    protected Point2D.Double position;
+    private Point2D.Double position;
 
     /**
      * Variable that tells if the object is dead.
      */
-    protected boolean dead;
+    private  boolean dead;
 
     /**
      * Creates a new instance of GameObject
      */
-    public GameObject(Point2D.Double pos) {
-        position = pos;
-        dead = false;
-        boundingVolume = new Rectangle();
+    public GameObject(Point2D.Double position) {
+        this.position = position;
+        this.dead = false;
+        this.boundingVolume = new Rectangle();
+    }
+
+    /**
+     * Get the position
+     *
+     * @return the current position
+     */
+    public Point2D.Double getPosition() {
+        return position;
+    }
+
+    /**
+     * Set the position
+     *
+     * @param x x coordinate
+     * @param y y coordinate
+     */
+    public void setPosition(double x, double y) {
+        setPosition(new Point2D.Double(x, y));
+    }
+
+    /**
+     * Set position
+     *
+     * @param position the new position
+     */
+    public void setPosition(Point2D.Double position) {
+        this.position = position;
     }
 
     /**
@@ -40,6 +68,19 @@ public abstract class GameObject {
      */
     public Rectangle getBoundingVolume() {
         return boundingVolume;
+    }
+
+    public void setBoundingVolume(int x, int y, int width, int height) {
+        setBoundingVolume(new Rectangle(x, y, width, height));
+    }
+
+    /**
+     * Set the bounding volume of this game object
+     *
+     * @param boundingVolume the new bounding volume
+     */
+    public void setBoundingVolume(Rectangle boundingVolume) {
+        this.boundingVolume = boundingVolume;
     }
 
     /**
@@ -51,9 +92,11 @@ public abstract class GameObject {
     }
 
     /**
-     * Calculate the objects bounding volume.
+     * Set the game object to be dead.
      */
-    protected abstract void calcBoundingVolume();
+    public void setDead() {
+        this.dead = true;
+    }
 
     /**
      * Update the game object.
@@ -66,10 +109,4 @@ public abstract class GameObject {
      * @param graphics the window's Graphics2D.
      */
     public abstract void draw(Graphics graphics);
-
-    /**
-     * This si the Accept method in the collision visitor. Uses double dispatch in the
-     * derived objects to collided with the right object.
-     */
-    public abstract void collidedWith(CollisionVisitor visitor);
 }

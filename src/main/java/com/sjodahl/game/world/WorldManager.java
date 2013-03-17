@@ -1,5 +1,7 @@
 package com.sjodahl.game.world;
 
+import com.sjodahl.game.missile.collision.MissileCommanderCollisionVisitor;
+
 import java.awt.*;
 import java.util.Iterator;
 import java.util.Vector;
@@ -14,19 +16,19 @@ public class WorldManager {
     /**
      * Vector of GameObject:s, that represents our world.
      */
-    private Vector<GameObject> objectList;
+    private Vector<GameObject<MissileCommanderCollisionVisitor>> objectList;
     
     /**
      * Creates a new instance of WorldManager
      */
     public WorldManager() {
-        objectList = new Vector<GameObject>();
+        objectList = new Vector<GameObject<MissileCommanderCollisionVisitor>>();
     }
     
     /**
      * Add a game object to the world
      */
-    public void addGameObject(GameObject gameObject) {
+    public void addGameObject(GameObject<MissileCommanderCollisionVisitor> gameObject) {
         objectList.add(gameObject);
     }
     
@@ -35,10 +37,10 @@ public class WorldManager {
      * and calls their onUpdate function.
      */
     public void update(long elapsedTime) {
-        Iterator iterator = objectList.iterator();
+        Iterator<GameObject<MissileCommanderCollisionVisitor>> iterator = objectList.iterator();
         
         while (iterator.hasNext()) {
-            GameObject go = (GameObject) iterator.next();
+            GameObject<MissileCommanderCollisionVisitor> go = iterator.next();
             
             if (go.isDead())
                 iterator.remove();
@@ -46,7 +48,7 @@ public class WorldManager {
                 go.update(elapsedTime);
         }
         
-        /* Test for collisions between game objects */
+        // Test for collisions between game objects
         collisionTest();
     }
     
@@ -56,12 +58,15 @@ public class WorldManager {
     private void collisionTest() {
         int i = 1;
 
-        for (GameObject object : objectList) {
-            CollisionVisitor visitor = (CollisionVisitor) object;
+        for (GameObject<MissileCommanderCollisionVisitor> thisObject : objectList) {
+            MissileCommanderCollisionVisitor visitor = (MissileCommanderCollisionVisitor) thisObject;
 
             for (int j = i; j < objectList.size(); j++) {
-                GameObject go = objectList.get(j);
-                go.collidedWith(visitor);
+                GameObject<MissileCommanderCollisionVisitor> thatObject = objectList.get(j);
+
+                if (thisObject.getBoundingVolume().intersects(thatObject.getBoundingVolume())) {
+                    thatObject.collision(visitor);
+                }
             }
 
             i++;
@@ -73,7 +78,7 @@ public class WorldManager {
      * stored in the world and calls their onDraw function.
      */
     public void draw(Graphics graphics) {
-        for (GameObject go : objectList) {
+        for (GameObject<MissileCommanderCollisionVisitor> go : objectList) {
             go.draw(graphics);
         }
     }

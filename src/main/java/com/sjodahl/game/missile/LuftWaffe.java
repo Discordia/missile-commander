@@ -1,6 +1,6 @@
 package com.sjodahl.game.missile;
 
-import com.sjodahl.game.world.CollisionVisitor;
+import com.sjodahl.game.missile.collision.MissileCommanderCollisionVisitor;
 import com.sjodahl.game.world.GameObject;
 
 import java.awt.*;
@@ -11,7 +11,7 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public class LuftWaffe extends GameObject implements CollisionVisitor
+public class LuftWaffe extends GameObject<MissileCommanderCollisionVisitor> implements MissileCommanderCollisionVisitor
 {
     
     /**
@@ -36,8 +36,9 @@ public class LuftWaffe extends GameObject implements CollisionVisitor
         
         calcBoundingVolume();
         
-        if (explosion.isOver())
-            dead = true;
+        if (explosion.isOver()) {
+            setDead();
+        }
     }
     
     /**
@@ -53,36 +54,35 @@ public class LuftWaffe extends GameObject implements CollisionVisitor
      *
      * @param visitor the other game object this one has collided with.
      */
-    public void collidedWith(CollisionVisitor visitor) {
-        visitor.collidedWithLuftWaffe(this);
+    public void collision(MissileCommanderCollisionVisitor visitor) {
+        visitor.collidedWith(this);
     }
     
     /**
      *
      */
     public void calcBoundingVolume() {
-        boundingVolume.setBounds((int)(position.x - explosion.getCurrentRadius()),
-                (int)(position.y - explosion.getCurrentRadius()),
-                (int)explosion.getCurrentRadius()*2,
-                (int)explosion.getCurrentRadius()*2);
+        Point2D.Double position = getPosition();
+
+        setBoundingVolume((int) (position.x - explosion.getCurrentRadius()),
+                (int) (position.y - explosion.getCurrentRadius()),
+                (int) explosion.getCurrentRadius() * 2,
+                (int) explosion.getCurrentRadius() * 2);
     }
     
     /**
-     *
+     * @param missile the Missile that the LuftWaffe collided with
      */
-    public void collidedWithMissile(GameObject go) {
-        if (getBoundingVolume().intersects(go.getBoundingVolume())) {
-            Missile missile = (Missile) go;
-            missile.explode();
-        }
+    public void collidedWith(Missile missile) {
+        missile.explode();
     }
     
-    public void collidedWithLuftWaffe(GameObject go) {
+    public void collidedWith(LuftWaffe luftWaffe) {
     }
     
-    public void collidedWithCity(GameObject go) {
+    public void collidedWith(City city) {
     }
 
-    public void collidedWithGround(GameObject go) {
+    public void collidedWith(Ground ground) {
     }
 }
