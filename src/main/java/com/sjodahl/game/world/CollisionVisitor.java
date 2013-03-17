@@ -9,20 +9,20 @@ public interface CollisionVisitor {
     /**
      * Called if an object has collided with an missile.
      */
-    public void collidedWithMissile(GameObject go);
+    void collidedWithMissile(GameObject go);
     
     /**
      * Called if an object has collided with an LuftWaffe.
      */
-    public void collidedWithLuftWaffe(GameObject go);
+    void collidedWithLuftWaffe(GameObject go);
     
     /**
      * Called if an object has collided with an City.
      */
-    public void collidedWithCity(GameObject go);
+    void collidedWithCity(GameObject go);
     
     /**
      * Called if an object has collided with the ground.
      */
-    public void collidedWithGround(GameObject go);
+    void collidedWithGround(GameObject go);
 }

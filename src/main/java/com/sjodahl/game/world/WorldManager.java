@@ -31,24 +31,17 @@ public class WorldManager {
     }
     
     /**
-     * Remove a game object from the world.
-     */
-    public void removeGameObject(GameObject go) {
-        objectList.remove(go);
-    }
-    
-    /**
      * Updates the world, iterates through all game objects
      * and calls their onUpdate function.
      */
     public void update(long elapsedTime) {
-        Iterator iter = objectList.iterator();
+        Iterator iterator = objectList.iterator();
         
-        while(iter.hasNext()) {
-            GameObject go = (GameObject) iter.next();
+        while (iterator.hasNext()) {
+            GameObject go = (GameObject) iterator.next();
             
             if (go.isDead())
-                iter.remove();
+                iterator.remove();
             else
                 go.update(elapsedTime);
         }
@@ -62,16 +55,15 @@ public class WorldManager {
      */
     private void collisionTest() {
         int i = 1;
-        Iterator iterator = objectList.iterator();
-        
-        while(iterator.hasNext()) {
-            CollisionVisitor visitor = (CollisionVisitor) iterator.next();
-            
+
+        for (GameObject object : objectList) {
+            CollisionVisitor visitor = (CollisionVisitor) object;
+
             for (int j = i; j < objectList.size(); j++) {
                 GameObject go = objectList.get(j);
                 go.collidedWith(visitor);
             }
-            
+
             i++;
         }
     }
@@ -81,10 +73,7 @@ public class WorldManager {
      * stored in the world and calls their onDraw function.
      */
     public void draw(Graphics graphics) {
-        Iterator iterator = objectList.iterator();
-        
-        while(iterator.hasNext()) {
-            GameObject go = (GameObject) iterator.next();
+        for (GameObject go : objectList) {
             go.draw(graphics);
         }
     }
