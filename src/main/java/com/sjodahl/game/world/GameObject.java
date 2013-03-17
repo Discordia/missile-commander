@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**
- * GameObject, can be draw, updated and collided with. In a more complex game
+ * GameObject, can be drawn, updated and collided with. In a more complex game
  * these may have been separated, perhaps then: GameObject implements Renderable, Collideable.
  *
  * @author Robert Sjödahl
@@ -23,7 +23,7 @@ public interface GameObject extends java.lang.Cloneable {
     public void update(long elapsedTime);
     
     /**
-     * Tell the game object to draw itself to the screen.
+     * Tell the game object to onDraw itself to the screen.
      *
      * @param graphics the window's Graphics2D.
      */
@@ -39,7 +39,7 @@ public interface GameObject extends java.lang.Cloneable {
     /**
      * Method to get the position of the game object.
      *
-     * @return position of the game obejct.
+     * @return position of the game object.
      */
     public Point2D.Double getPosition();
     

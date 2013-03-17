@@ -1,7 +1,5 @@
 package com.sjodahl.game.core;
 
-import com.sjodahl.game.world.WorldManager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -12,49 +10,44 @@ import java.awt.image.BufferStrategy;
  * @author Robert Sjödahl
  */
 public abstract class GameManager {
-    
-    /**
-     * Last time, used for calculating how long a frame takes
-     * good to know when updating.
-     */
-    private long lastTime;
-    
+
     /**
      * True if the game is running, false otherwise.
      */
     private boolean isRunning;
-    
-    /**
-     * Input manager.
-     */
-    protected InputManager inputManager;
-    
+
     /**
      * Our screen.
      */
-    protected JFrame screen;
-    
+    private JFrame screen;
+
+    /**
+     * Input manager.
+     */
+    private InputManager inputManager;
+
     /**
      * BufferStrategy for double buffering.
      */
     private BufferStrategy bufferStrategy;
-    
+
     /**
-     * WorldManager holds our world/scene.
+     * Screen size
      */
-    protected WorldManager worldManager;
-    
+    private final Dimension size;
+
     /**
      * Creates a new instance of GameManager
      */
-    public GameManager() {
+    public GameManager(Dimension size) {
+        this.size = size;
     }
     
     /**
      * Run game, starts a new thread and runs the game in there. Calls
      * customized gameLoop in game that implements the GameManager.
      */
-    public void run() {
+    public void start() {
         try {
             init();
             gameLoop();
@@ -74,13 +67,13 @@ public abstract class GameManager {
     }
     
     /**
-     * Init, initalizes our game manager. Setup the screen etc.
+     * Init, initializes our game manager. Setup the screen etc.
      */
-    public void init() {
+    private void init() {
         screen = new JFrame("Missile Commander");
         screen.setBackground(Color.blue);
         screen.setForeground(Color.white);
-        screen.setSize(800, 700);
+        screen.setSize(size);
         screen.setResizable(false);
         screen.setVisible(true);
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,26 +86,28 @@ public abstract class GameManager {
         } catch (IllegalStateException ise) {
             System.exit(-1);
         }
-        
+
+        inputManager = new InputManager(screen);
+
         isRunning = true;
+
         onInit();
     }
     
     /**
      * GameLoop.
      */
-    public void gameLoop() {
-        
-        lastTime = System.currentTimeMillis();
+    private void gameLoop() {
+        long lastTime = System.currentTimeMillis();
         
         while(isRunning) {
             long elapsedTime = System.currentTimeMillis() - lastTime;
             lastTime += elapsedTime;
             
-            update(elapsedTime);
+            onUpdate(elapsedTime, inputManager);
             
             Graphics g = bufferStrategy.getDrawGraphics();
-            draw(g);
+            onDraw(g);
             bufferStrategy.show();
             
             screen.getContentPane().paintComponents(g);
@@ -120,7 +115,7 @@ public abstract class GameManager {
             
             try {
                 Thread.sleep(100);
-            } catch(InterruptedException e) {}
+            } catch(InterruptedException ignored) {}
         }
     }
     
@@ -132,12 +127,12 @@ public abstract class GameManager {
     /**
      * Update method should be overridden by games that extends the GameManager.
      */
-    public abstract void update(long elapsedTime);
+    public abstract void onUpdate(long elapsedTime, InputManager inputManager);
     
     /**
      * Draw method should be overridden by games that extends the GameManager.
      */
-    public abstract void draw(Graphics graphics);
+    public abstract void onDraw(Graphics graphics);
     
     /**
      * Method that specific game managers should override to make destruction.

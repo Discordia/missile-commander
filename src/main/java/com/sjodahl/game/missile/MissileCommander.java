@@ -21,6 +21,12 @@ import java.awt.geom.Point2D;
  */
 public class MissileCommander extends GameManager {
 
+    private static final Dimension SCREEN_SIZE = new Dimension(800, 700);
+    /**
+     * WorldManager holds our world/scene.
+     */
+    private WorldManager worldManager;
+
     /**
      * Our enemy that shots missiles at us.
      */
@@ -36,6 +42,8 @@ public class MissileCommander extends GameManager {
      * implements the old arcade game missile commander.
      */
     public MissileCommander() {
+        super(SCREEN_SIZE);
+
         currentTime = 0;
     }
     
@@ -43,22 +51,24 @@ public class MissileCommander extends GameManager {
      * Initialization method.
      */
     public void onInit() {
-        inputManager = new InputManager(screen);
         worldManager = new WorldManager();
-        enemy = new Enemy(new Dimension(800, 700));
+        enemy = new Enemy(SCREEN_SIZE);
         
         // Add cities
         worldManager.addGameObject(new City(new Point2D.Double(100, 700)));
         worldManager.addGameObject(new City(new Point2D.Double(260, 700)));
         worldManager.addGameObject(new City(new Point2D.Double(420, 700)));
         worldManager.addGameObject(new City(new Point2D.Double(580, 700)));
-        worldManager.addGameObject(new Ground(new Point2D.Double(0, 700), new Dimension(800, 40)));
+
+        // Add ground
+        Ground ground = new Ground(new Point2D.Double(0, SCREEN_SIZE.height), new Dimension(SCREEN_SIZE.width, 40));
+        worldManager.addGameObject(ground);
     }
     
     /**
-     * Implements the update method from the GameManager interface.
+     * Implements the onUpdate method from the GameManager interface.
      */
-    public void update(long elapsedTime) {
+    public void onUpdate(long elapsedTime, InputManager inputManager) {
         if (inputManager.isMouseDown()) {
             Point pos = inputManager.getMousePos();
             worldManager.addGameObject(new LuftWaffe(new Point2D.Double(pos.x, pos.y)));
@@ -76,12 +86,14 @@ public class MissileCommander extends GameManager {
     }
     
     /**
-     * Implements draw method from the GameManager interface.
+     * Implements onDraw method from the GameManager interface.
      */
-    public void draw(Graphics graphics) {
+    public void onDraw(Graphics graphics) {
+        // Draw background
         graphics.setColor(Color.blue);
-        graphics.fillRect(0, 0, screen.getWidth(), screen.getHeight());
-        
+        graphics.fillRect(0, 0, SCREEN_SIZE.width, SCREEN_SIZE.height);
+
+        // Draw world
         worldManager.draw(graphics);
     }
 
@@ -93,6 +105,6 @@ public class MissileCommander extends GameManager {
      */
     public static void main(String args[]) {
         MissileCommander game = new MissileCommander();
-        game.run();
+        game.start();
     }
 }

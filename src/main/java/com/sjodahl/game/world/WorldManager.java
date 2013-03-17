@@ -46,7 +46,7 @@ public class WorldManager {
     
     /**
      * Updates the world, iterates through all game objects
-     * and calls their update function.
+     * and calls their onUpdate function.
      */
     public void update(long elapsedTime) {
         Iterator iter = objectList.iterator();
@@ -85,7 +85,7 @@ public class WorldManager {
     
     /**
      * Draw the world, iterates through the game objects
-     * stored in the world and calls their draw function.
+     * stored in the world and calls their onDraw function.
      */
     public void draw(Graphics graphics) {
         Iterator iterator = objectList.iterator();
