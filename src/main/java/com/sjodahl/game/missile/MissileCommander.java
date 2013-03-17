@@ -4,10 +4,11 @@
  * Created on February 11, 2005, 10:10 PM
  */
 
-package com.sjodahl.game.missile.game.missle;
+package com.sjodahl.game.missile;
 
 import com.sjodahl.game.missile.core.GameManager;
 import com.sjodahl.game.missile.core.InputManager;
+import com.sjodahl.game.missile.game.missle.*;
 import com.sjodahl.game.missile.world.WorldManager;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,19 +19,12 @@ import java.awt.geom.Point2D;
 
 
 /**
+ * Entry-point of the application
  *
  * @author Robert Sjödahl
  */
 public class MissileCommander extends GameManager {
-    
-    /**
-     * Main method for the game.
-     */
-    public static void main(String args[]) {
-        MissileCommander game = new MissileCommander();
-        game.run();
-    }
-    
+
     /**
      * Our enemy that shots missiles at us.
      */
@@ -96,5 +90,13 @@ public class MissileCommander extends GameManager {
     }
 
     public void onDestroy() {
+    }
+
+    /**
+     * Main method for the game.
+     */
+    public static void main(String args[]) {
+        MissileCommander game = new MissileCommander();
+        game.run();
     }
 }
