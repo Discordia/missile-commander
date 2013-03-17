@@ -7,17 +7,17 @@ package com.sjodahl.game.world;
 public interface CollisionVisitor {
     
     /**
-     * Called if an object has collided with an missile.
+     * Called if an object has collided with a Missile.
      */
     void collidedWithMissile(GameObject go);
     
     /**
-     * Called if an object has collided with an LuftWaffe.
+     * Called if an object has collided with a LuftWaffe.
      */
     void collidedWithLuftWaffe(GameObject go);
     
     /**
-     * Called if an object has collided with an City.
+     * Called if an object has collided with a City.
      */
     void collidedWithCity(GameObject go);
     
