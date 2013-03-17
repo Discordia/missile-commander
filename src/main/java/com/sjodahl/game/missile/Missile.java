@@ -131,39 +131,29 @@ public class Missile extends GameObject<MissileCommanderCollisionVisitor> implem
      * @param missile the Missile that this Missile collided with
      */
     public void collidedWith(Missile missile) {
-        if (missile.getBoundingVolume().intersects(getBoundingVolume())) {
-            explode();
-            missile.explode();
-        }
-        
+        explode();
+        missile.explode();
     }
     
     /**
      * @param luftWaffe the LuftWaffe that the Missile Collided with
      */
     public void collidedWith(LuftWaffe luftWaffe) {
-        if (luftWaffe.getBoundingVolume().intersects(getBoundingVolume())) {
-            explode();
-        }
+        explode();
     }
     
     /**
-     *
-     * @param city
+     * @param city the City that this Missile collided with
      */
     public void collidedWith(City city) {
-        if (city.getBoundingVolume().intersects(getBoundingVolume())) {
-            explode();
-            city.destroy();
-        }
+        explode();
+        city.destroy();
     }
     
     /**
-     *
-     * @param ground
+     * @param ground the Ground that this Missile collided with
      */
     public void collidedWith(Ground ground) {
-        if (getBoundingVolume().intersects(ground.getBoundingVolume()))
-            explode();
+        explode();
     }
 }

@@ -71,9 +71,7 @@ public class LuftWaffe extends GameObject<MissileCommanderCollisionVisitor> impl
      * @param missile the Missile that the LuftWaffe collided with
      */
     public void collidedWith(Missile missile) {
-        if (getBoundingVolume().intersects(missile.getBoundingVolume())) {
-            missile.explode();
-        }
+        missile.explode();
     }
     
     public void collidedWith(LuftWaffe luftWaffe) {

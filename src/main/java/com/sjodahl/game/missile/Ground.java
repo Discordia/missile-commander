@@ -61,9 +61,7 @@ public class Ground extends GameObject<MissileCommanderCollisionVisitor> impleme
      * @param missile the Missile that the Ground collided with
      */
     public void collidedWith(Missile missile) {
-        if (missile.getBoundingVolume().intersects(getBoundingVolume())) {
-            missile.explode();
-        }
+        missile.explode();
     }
 
     public void collidedWith(LuftWaffe luftWaffe) {

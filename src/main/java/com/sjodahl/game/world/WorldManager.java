@@ -56,12 +56,15 @@ public class WorldManager {
     private void collisionTest() {
         int i = 1;
 
-        for (GameObject object : objectList) {
-            CollisionVisitor visitor = (CollisionVisitor) object;
+        for (GameObject thisObject : objectList) {
+            CollisionVisitor visitor = (CollisionVisitor) thisObject;
 
             for (int j = i; j < objectList.size(); j++) {
-                GameObject go = objectList.get(j);
-                go.collidedWith(visitor);
+                GameObject thatObject = objectList.get(j);
+
+                if (thisObject.getBoundingVolume().intersects(thatObject.getBoundingVolume())) {
+                    thatObject.collidedWith(visitor);
+                }
             }
 
             i++;

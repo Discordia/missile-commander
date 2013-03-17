@@ -96,10 +96,8 @@ public class City extends GameObject<MissileCommanderCollisionVisitor> implement
      * @param missile the Missile that the City collided with
      */
     public void collidedWith(Missile missile) {
-        if (missile.getBoundingVolume().intersects(getBoundingVolume())) {
-            missile.explode();
-            destroy();
-        }
+        missile.explode();
+        destroy();
     }
 
     public void collidedWith(LuftWaffe luftWaffe) {
