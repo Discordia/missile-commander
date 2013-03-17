@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public abstract class GameObject<Visitor extends CollisionVisitor> {
+public abstract class GameObject<Visitor extends CollisionVisitor> implements Collidable<Visitor> {
 
     /**
      * The game objects bounding volume;
@@ -109,10 +109,4 @@ public abstract class GameObject<Visitor extends CollisionVisitor> {
      * @param graphics the window's Graphics2D.
      */
     public abstract void draw(Graphics graphics);
-
-    /**
-     * This si the Accept method in the collision visitor. Uses double dispatch in the
-     * derived objects to collided with the right object.
-     */
-    public abstract void collidedWith(Visitor visitor);
 }

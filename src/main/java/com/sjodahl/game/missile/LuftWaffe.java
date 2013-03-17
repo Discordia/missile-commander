@@ -54,7 +54,7 @@ public class LuftWaffe extends GameObject<MissileCommanderCollisionVisitor> impl
      *
      * @param visitor the other game object this one has collided with.
      */
-    public void collidedWith(MissileCommanderCollisionVisitor visitor) {
+    public void collision(MissileCommanderCollisionVisitor visitor) {
         visitor.collidedWith(this);
     }
     

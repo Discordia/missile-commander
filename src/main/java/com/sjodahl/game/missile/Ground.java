@@ -54,7 +54,7 @@ public class Ground extends GameObject<MissileCommanderCollisionVisitor> impleme
     /**
      *
      */
-    public  void collidedWith(MissileCommanderCollisionVisitor visitor) {
+    public  void collision(MissileCommanderCollisionVisitor visitor) {
         visitor.collidedWith(this);
     }
     

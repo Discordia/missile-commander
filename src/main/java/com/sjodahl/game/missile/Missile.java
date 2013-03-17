@@ -85,7 +85,7 @@ public class Missile extends GameObject<MissileCommanderCollisionVisitor> implem
     /**
      * Tell visitor that it has collided with a missile.
      */
-    public void collidedWith(MissileCommanderCollisionVisitor visitor) {
+    public void collision(MissileCommanderCollisionVisitor visitor) {
         visitor.collidedWith(this);
     }
 

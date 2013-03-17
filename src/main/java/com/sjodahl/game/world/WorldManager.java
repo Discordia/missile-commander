@@ -65,7 +65,7 @@ public class WorldManager {
                 GameObject<MissileCommanderCollisionVisitor> thatObject = objectList.get(j);
 
                 if (thisObject.getBoundingVolume().intersects(thatObject.getBoundingVolume())) {
-                    thatObject.collidedWith(visitor);
+                    thatObject.collision(visitor);
                 }
             }
 

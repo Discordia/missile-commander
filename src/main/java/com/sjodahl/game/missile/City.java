@@ -75,7 +75,7 @@ public class City extends GameObject<MissileCommanderCollisionVisitor> implement
      *
      * @param visitor the game objects Collision visitor.
      */
-    public void collidedWith(MissileCommanderCollisionVisitor visitor) {
+    public void collision(MissileCommanderCollisionVisitor visitor) {
         visitor.collidedWith(this);
     }
     
