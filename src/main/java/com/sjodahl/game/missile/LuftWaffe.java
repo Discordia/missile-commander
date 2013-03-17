@@ -36,8 +36,9 @@ public class LuftWaffe extends GameObject<MissileCommanderCollisionVisitor> impl
         
         calcBoundingVolume();
         
-        if (explosion.isOver())
-            dead = true;
+        if (explosion.isOver()) {
+            setDead();
+        }
     }
     
     /**
@@ -61,10 +62,12 @@ public class LuftWaffe extends GameObject<MissileCommanderCollisionVisitor> impl
      *
      */
     public void calcBoundingVolume() {
-        boundingVolume.setBounds((int)(position.x - explosion.getCurrentRadius()),
-                (int)(position.y - explosion.getCurrentRadius()),
-                (int)explosion.getCurrentRadius()*2,
-                (int)explosion.getCurrentRadius()*2);
+        Point2D.Double position = getPosition();
+
+        setBoundingVolume((int) (position.x - explosion.getCurrentRadius()),
+                (int) (position.y - explosion.getCurrentRadius()),
+                (int) explosion.getCurrentRadius() * 2,
+                (int) explosion.getCurrentRadius() * 2);
     }
     
     /**

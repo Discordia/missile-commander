@@ -31,7 +31,8 @@ public class Ground extends GameObject<MissileCommanderCollisionVisitor> impleme
      * Calculate the objects bounding volume.
      */
     protected void calcBoundingVolume() {
-        boundingVolume.setBounds((int)position.x, (int)position.y, (int)position.x + size.width, (int)position.y - size.height);
+        Point2D.Double position = getPosition();
+        setBoundingVolume((int) position.x, (int) position.y, (int) position.x + size.width, (int) position.y - size.height);
     }
     
     /**

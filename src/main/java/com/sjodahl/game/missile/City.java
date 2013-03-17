@@ -59,6 +59,8 @@ public class City extends GameObject<MissileCommanderCollisionVisitor> implement
         graphics.setColor(Color.GRAY);
 
         int diff = citySize.height - citySize.width;
+
+        Point2D.Double position = getPosition();
         int x = (int) position.x;
         int y = (int) position.y;
 
@@ -81,14 +83,16 @@ public class City extends GameObject<MissileCommanderCollisionVisitor> implement
      *
      */
     public void calcBoundingVolume() {
-        boundingVolume.setBounds((int) position.x, (int) position.y, citySize.width, citySize.height);
+        Point2D.Double position = getPosition();
+
+        setBoundingVolume((int) position.x, (int) position.y, citySize.width, citySize.height);
     }
     
     /**
      * Destroy city, because it has been hit.
      */
     public void destroy() {
-        dead = true;
+        setDead();
     }
     
     /**
