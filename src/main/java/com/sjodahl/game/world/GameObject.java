@@ -1,9 +1,3 @@
-/*
- * GameObject.java
- *
- * Created on February 11, 2005, 10:21 PM
- */
-
 package com.sjodahl.game.world;
 
 import java.awt.*;
@@ -15,7 +9,7 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public interface GameObject extends java.lang.Cloneable {
+public interface GameObject {
     
     /**
      * Update the game object.
@@ -37,13 +31,6 @@ public interface GameObject extends java.lang.Cloneable {
     public Rectangle getBoundingVolume();
     
     /**
-     * Method to get the position of the game object.
-     *
-     * @return position of the game object.
-     */
-    public Point2D.Double getPosition();
-    
-    /**
      * Method for checking whether a object is dead, and should then be
      * removed from the game.
      *
@@ -57,9 +44,4 @@ public interface GameObject extends java.lang.Cloneable {
      * visitor pattern.
      */
     public void collidedWith(CollisionVisitor visitor);
-    
-    /**
-     * Make game objects Cloneable.
-     */
-    public Object clone();
 }

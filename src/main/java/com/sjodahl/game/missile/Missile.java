@@ -93,16 +93,6 @@ public class Missile extends GameObjectStub implements CollisionVisitor
     /**
      *
      */
-    public Object clone() {
-        GameObjectStub missile =  new Missile(position);
-        ((Missile)missile).setDirection(this.direction);
-        ((Missile)missile).setSpeed(this.speed);
-        return missile;
-    }
-    
-    /**
-     *
-     */
     public void calcBoundingVolume() {
         if (explosion != null) {
             boundingVolume.setBounds((int)(position.x - explosion.getCurrentRadius()),

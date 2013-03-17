@@ -1,9 +1,3 @@
-/*
- * WorldManager.java
- *
- * Created on February 11, 2005, 10:10 PM
- */
-
 package com.sjodahl.game.world;
 
 import java.awt.*;
@@ -32,8 +26,7 @@ public class WorldManager {
     /**
      * Add a game object to the world
      */
-    public void addGameObject(GameObject go) {
-        GameObject gameObject = (GameObject) go.clone();
+    public void addGameObject(GameObject gameObject) {
         objectList.add(gameObject);
     }
     

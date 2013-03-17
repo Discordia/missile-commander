@@ -61,14 +61,6 @@ public class LuftWaffe extends GameObjectStub implements CollisionVisitor
     /**
      *
      */
-    public Object clone() {
-        GameObject luftWaffe = new LuftWaffe(this.getPosition());
-        return luftWaffe;
-    }
-    
-    /**
-     *
-     */
     public void calcBoundingVolume() {
         boundingVolume.setBounds((int)(position.x - explosion.getCurrentRadius()),
                 (int)(position.y - explosion.getCurrentRadius()),

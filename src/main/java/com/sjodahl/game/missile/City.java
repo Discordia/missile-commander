@@ -79,14 +79,6 @@ public class City extends GameObjectStub implements CollisionVisitor
     }
     
     /**
-     *                                                                                   isitor
-     */
-    public Object clone() {
-        GameObject city = new City(this.getPosition());
-        return city;
-    }
-    
-    /**
      *
      */
     public void calcBoundingVolume() {

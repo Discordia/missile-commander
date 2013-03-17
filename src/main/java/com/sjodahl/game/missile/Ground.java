@@ -59,14 +59,6 @@ public class Ground extends GameObjectStub implements CollisionVisitor
     }
     
     /**
-     * Make game objects Cloneable.
-     */
-    public Object clone() {
-        GameObjectStub ground = new Ground(getPosition(), size);
-        return ground;
-    }
-    
-    /**
      *
      */
     public void collidedWithMissile(GameObject go) {

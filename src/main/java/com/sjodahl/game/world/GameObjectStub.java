@@ -1,9 +1,3 @@
-/*
- * GameObjectStub.java
- *
- * Created on February 12, 2005, 12:58 AM
- */
-
 package com.sjodahl.game.world;
 
 import java.awt.*;
@@ -82,10 +76,4 @@ public abstract class GameObjectStub implements GameObject {
      * derived objects to collided with the right object.
      */
     public abstract void collidedWith(CollisionVisitor visitor);
-    
-    /**
-     * Make game objects Cloneable.
-     */
-    public abstract Object clone();
-    
 }

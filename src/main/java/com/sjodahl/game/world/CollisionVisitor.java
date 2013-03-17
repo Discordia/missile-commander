@@ -7,7 +7,7 @@ package com.sjodahl.game.world;
 public interface CollisionVisitor {
     
     /**
-     * Called if an obejct has collided with an missile.
+     * Called if an object has collided with an missile.
      */
     public void collidedWithMissile(GameObject go);
     
