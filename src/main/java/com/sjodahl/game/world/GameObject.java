@@ -9,39 +9,67 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public interface GameObject {
-    
+public abstract class GameObject {
+
+    /**
+     * The game objects bounding volume;
+     */
+    protected Rectangle boundingVolume;
+
+    /**
+     * The game objects position
+     */
+    protected Point2D.Double position;
+
+    /**
+     * Variable that tells if the object is dead.
+     */
+    protected boolean dead;
+
+    /**
+     * Creates a new instance of GameObject
+     */
+    public GameObject(Point2D.Double pos) {
+        position = pos;
+        dead = false;
+        boundingVolume = new Rectangle();
+    }
+
+    /**
+     * Get the bounding volume of the game object, for collision tests.
+     */
+    public Rectangle getBoundingVolume() {
+        return boundingVolume;
+    }
+
+    /**
+     * Tells whether a game object is dead, that is should
+     * be removed from the game.
+     */
+    public boolean isDead() {
+        return dead;
+    }
+
+    /**
+     * Calculate the objects bounding volume.
+     */
+    protected abstract void calcBoundingVolume();
+
     /**
      * Update the game object.
      */
-    public void update(long elapsedTime);
-    
+    public abstract void update(long elapsedTime);
+
     /**
-     * Tell the game object to onDraw itself to the screen.
+     * Tell the game object to draw itself to the screen.
      *
      * @param graphics the window's Graphics2D.
      */
-    public void draw(Graphics graphics);
-    
+    public abstract void draw(Graphics graphics);
+
     /**
-     * Get the bounding volume of the game object, for collision tests.
-     *
-     * @return a Rectangle representing the game objects bounding volume.
+     * This si the Accept method in the collision visitor. Uses double dispatch in the
+     * derived objects to collided with the right object.
      */
-    public Rectangle getBoundingVolume();
-    
-    /**
-     * Method for checking whether a object is dead, and should then be
-     * removed from the game.
-     *
-     * @return true if it is dead and should be removed from the game, false
-     * otherwise.
-     */
-    public boolean isDead();
-    
-    /**
-     * Represents the accept(Visitor visitor) you often see in explanation of the
-     * visitor pattern.
-     */
-    public void collidedWith(CollisionVisitor visitor);
+    public abstract void collidedWith(CollisionVisitor visitor);
 }

@@ -2,7 +2,6 @@ package com.sjodahl.game.missile;
 
 import com.sjodahl.game.world.CollisionVisitor;
 import com.sjodahl.game.world.GameObject;
-import com.sjodahl.game.world.GameObjectStub;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -12,7 +11,7 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public class Missile extends GameObjectStub implements CollisionVisitor
+public class Missile extends GameObject implements CollisionVisitor
 {
     
     /**
