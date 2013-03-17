@@ -1,4 +1,4 @@
-package com.sjodahl.game.missile.world;
+package com.sjodahl.game.world;
 
 /**
  *

@@ -1,9 +1,8 @@
-package com.sjodahl.game.missile.core;
+package com.sjodahl.game.core;
 
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputAdapter;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * InputManager listens for input. Could be much more advanced than it is

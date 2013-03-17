@@ -4,10 +4,9 @@
  * Created on February 12, 2005, 12:58 AM
  */
 
-package com.sjodahl.game.missile.world;
+package com.sjodahl.game.world;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**

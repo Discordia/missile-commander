@@ -6,15 +6,11 @@
 
 package com.sjodahl.game.missile;
 
-import com.sjodahl.game.missile.core.GameManager;
-import com.sjodahl.game.missile.core.InputManager;
-import com.sjodahl.game.missile.game.missle.*;
-import com.sjodahl.game.missile.world.WorldManager;
-import java.awt.Color;
-import java.awt.Dimension;
+import com.sjodahl.game.core.GameManager;
+import com.sjodahl.game.core.InputManager;
+import com.sjodahl.game.world.WorldManager;
 
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 

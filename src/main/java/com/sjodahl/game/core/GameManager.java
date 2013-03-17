@@ -1,6 +1,6 @@
-package com.sjodahl.game.missile.core;
+package com.sjodahl.game.core;
 
-import com.sjodahl.game.missile.world.WorldManager;
+import com.sjodahl.game.world.WorldManager;
 
 import javax.swing.*;
 import java.awt.*;

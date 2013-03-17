@@ -1,11 +1,10 @@
-package com.sjodahl.game.missile.game.missle;
+package com.sjodahl.game.missile;
 
-import com.sjodahl.game.missile.world.CollisionVisitor;
-import com.sjodahl.game.missile.world.GameObject;
-import com.sjodahl.game.missile.world.GameObjectStub;
-import java.awt.Color;
-import java.awt.Graphics;
+import com.sjodahl.game.world.CollisionVisitor;
+import com.sjodahl.game.world.GameObject;
+import com.sjodahl.game.world.GameObjectStub;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**

@@ -1,6 +1,6 @@
-package com.sjodahl.game.missile.game.missle;
+package com.sjodahl.game.missile;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
 

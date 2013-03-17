@@ -1,7 +1,6 @@
-package com.sjodahl.game.missile.game.missle;
+package com.sjodahl.game.missile;
 
-import java.awt.Graphics;
-
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**

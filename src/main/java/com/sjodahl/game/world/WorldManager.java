@@ -4,10 +4,11 @@
  * Created on February 11, 2005, 10:10 PM
  */
 
-package com.sjodahl.game.missile.world;
+package com.sjodahl.game.world;
 
-import java.awt.Graphics;
-import java.util.*;
+import java.awt.*;
+import java.util.Iterator;
+import java.util.Vector;
 
 /**
  * World manager, manages our GameObject:s
