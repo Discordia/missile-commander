@@ -9,7 +9,7 @@ import java.awt.image.BufferStrategy;
  *
  * @author Robert Sjödahl
  */
-public abstract class GameManager {
+public class GameManager {
 
     /**
      * True if the game is running, false otherwise.
@@ -37,10 +37,16 @@ public abstract class GameManager {
     private final Dimension size;
 
     /**
+     * The game to run
+     */
+    private final Game game;
+
+    /**
      * Creates a new instance of GameManager
      */
-    public GameManager(Dimension size) {
+    public GameManager(Dimension size, Game game) {
         this.size = size;
+        this.game = game;
     }
     
     /**
@@ -52,12 +58,12 @@ public abstract class GameManager {
             init();
             gameLoop();
         } finally {
-            onDestroy();
+            destroy();
             screen.dispose();
         }
         
     }
-    
+
     /**
      * Used to stop the game manager, i.e stop the
      * game loop.
@@ -65,7 +71,7 @@ public abstract class GameManager {
     public void stop() {
         isRunning = false;
     }
-    
+
     /**
      * Init, initializes our game manager. Setup the screen etc.
      */
@@ -77,7 +83,7 @@ public abstract class GameManager {
         screen.setResizable(false);
         screen.setVisible(true);
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         try {
             screen.createBufferStrategy(2);
             bufferStrategy = screen.getBufferStrategy();
@@ -91,9 +97,14 @@ public abstract class GameManager {
 
         isRunning = true;
 
-        onInit();
+        game.onInit();
     }
-    
+
+    private void destroy()
+    {
+        game.onDestroy();
+    }
+
     /**
      * GameLoop.
      */
@@ -104,10 +115,10 @@ public abstract class GameManager {
             long elapsedTime = System.currentTimeMillis() - lastTime;
             lastTime += elapsedTime;
             
-            onUpdate(elapsedTime, inputManager);
+            game.onUpdate(elapsedTime, inputManager);
             
             Graphics g = bufferStrategy.getDrawGraphics();
-            onDraw(g);
+            game.onDraw(g);
             bufferStrategy.show();
             
             screen.getContentPane().paintComponents(g);
@@ -118,24 +129,4 @@ public abstract class GameManager {
             } catch(InterruptedException ignored) {}
         }
     }
-    
-    /**
-     * Method that specific game managers should override to make initialization.
-     */
-    public abstract void onInit();
-    
-    /**
-     * Update method should be overridden by games that extends the GameManager.
-     */
-    public abstract void onUpdate(long elapsedTime, InputManager inputManager);
-    
-    /**
-     * Draw method should be overridden by games that extends the GameManager.
-     */
-    public abstract void onDraw(Graphics graphics);
-    
-    /**
-     * Method that specific game managers should override to make destruction.
-     */
-    public abstract void onDestroy();
 }

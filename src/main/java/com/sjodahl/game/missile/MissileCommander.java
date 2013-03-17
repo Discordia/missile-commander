@@ -1,11 +1,6 @@
-/*
- * MissileCommander.java
- *
- * Created on February 11, 2005, 10:10 PM
- */
-
 package com.sjodahl.game.missile;
 
+import com.sjodahl.game.core.Game;
 import com.sjodahl.game.core.GameManager;
 import com.sjodahl.game.core.InputManager;
 import com.sjodahl.game.world.WorldManager;
@@ -19,9 +14,18 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public class MissileCommander extends GameManager {
+public class MissileCommander implements Game {
 
+    /**
+     * Screen size
+     */
     private static final Dimension SCREEN_SIZE = new Dimension(800, 700);
+
+    /**
+     * The game manager that runs our game
+     */
+    private final GameManager gameManager;
+
     /**
      * WorldManager holds our world/scene.
      */
@@ -42,11 +46,25 @@ public class MissileCommander extends GameManager {
      * implements the old arcade game missile commander.
      */
     public MissileCommander() {
-        super(SCREEN_SIZE);
+        gameManager = new GameManager(SCREEN_SIZE, this);
 
         currentTime = 0;
     }
-    
+
+    /**
+     * Start Missile Commander game
+     */
+    public void start() {
+        gameManager.start();
+    }
+
+    /**
+     * Stop Missile Commander game
+     */
+    public void stop() {
+        gameManager.stop();
+    }
+
     /**
      * Initialization method.
      */
@@ -104,7 +122,7 @@ public class MissileCommander extends GameManager {
      * Main method for the game.
      */
     public static void main(String args[]) {
-        MissileCommander game = new MissileCommander();
+        final MissileCommander game = new MissileCommander();
         game.start();
     }
 }
