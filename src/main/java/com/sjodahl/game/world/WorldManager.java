@@ -35,10 +35,10 @@ public class WorldManager {
      * and calls their onUpdate function.
      */
     public void update(long elapsedTime) {
-        Iterator iterator = objectList.iterator();
+        Iterator<GameObject> iterator = objectList.iterator();
         
         while (iterator.hasNext()) {
-            GameObject go = (GameObject) iterator.next();
+            GameObject go = iterator.next();
             
             if (go.isDead())
                 iterator.remove();
@@ -46,7 +46,7 @@ public class WorldManager {
                 go.update(elapsedTime);
         }
         
-        /* Test for collisions between game objects */
+        // Test for collisions between game objects
         collisionTest();
     }
     

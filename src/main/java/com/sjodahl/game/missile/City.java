@@ -29,20 +29,20 @@ public class City extends GameObject<MissileCommanderCollisionVisitor> implement
     private Dimension citySize;
     
     /**
-     * Creates a new instance of City
+     * Creates a new instance of City with default size
      */
     public City(Point2D.Double pos) {
-        super(pos);
-        citySize = new Dimension(DEFAULT_CITY_WIDTH, DEFAULT_CITY_HEIGHT);
-        calcBoundingVolume();
+        this(pos, new Dimension(DEFAULT_CITY_WIDTH, DEFAULT_CITY_HEIGHT));
     }
     
     /**
-     *
+     * Creates a new instance of City
      */
     public City(Point2D.Double pos, Dimension size) {
         super(pos);
+
         citySize = new Dimension(size);
+        calcBoundingVolume();
     }
     
     /**
