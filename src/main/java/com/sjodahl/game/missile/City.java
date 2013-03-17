@@ -1,6 +1,6 @@
 package com.sjodahl.game.missile;
 
-import com.sjodahl.game.world.CollisionVisitor;
+import com.sjodahl.game.missile.collision.MissileCommanderCollisionVisitor;
 import com.sjodahl.game.world.GameObject;
 
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public class City extends GameObject implements CollisionVisitor
+public class City extends GameObject<MissileCommanderCollisionVisitor> implements MissileCommanderCollisionVisitor
 {
     
     /**
@@ -24,7 +24,7 @@ public class City extends GameObject implements CollisionVisitor
     public static final int DEFAULT_CITY_WIDTH = 40;
     
     /**
-     *
+     * The city size
      */
     private Dimension citySize;
     
@@ -73,8 +73,8 @@ public class City extends GameObject implements CollisionVisitor
      *
      * @param visitor the game objects Collision visitor.
      */
-    public void collidedWith(CollisionVisitor visitor) {
-        visitor.collidedWithCity(this);
+    public void collidedWith(MissileCommanderCollisionVisitor visitor) {
+        visitor.collidedWith(this);
     }
     
     /**
@@ -93,21 +93,21 @@ public class City extends GameObject implements CollisionVisitor
     
     /**
      *
+     * @param missile the Missile that the City collided with
      */
-    public void collidedWithMissile(GameObject go) {
-        if (go.getBoundingVolume().intersects(getBoundingVolume())) {
-            Missile missile = (Missile) go;
+    public void collidedWith(Missile missile) {
+        if (missile.getBoundingVolume().intersects(getBoundingVolume())) {
             missile.explode();
             destroy();
         }
     }
 
-    public void collidedWithLuftWaffe(GameObject go) {
+    public void collidedWith(LuftWaffe luftWaffe) {
     }
     
-    public void collidedWithCity(GameObject go) {
+    public void collidedWith(City city) {
     }
 
-    public void collidedWithGround(GameObject go) {
+    public void collidedWith(Ground ground) {
     }
 }

@@ -1,6 +1,6 @@
 package com.sjodahl.game.missile;
 
-import com.sjodahl.game.world.CollisionVisitor;
+import com.sjodahl.game.missile.collision.MissileCommanderCollisionVisitor;
 import com.sjodahl.game.world.GameObject;
 
 import java.awt.*;
@@ -11,7 +11,7 @@ import java.awt.geom.Point2D;
  *
  * @author Robert Sjödahl
  */
-public class Missile extends GameObject implements CollisionVisitor
+public class Missile extends GameObject<MissileCommanderCollisionVisitor> implements MissileCommanderCollisionVisitor
 {
     
     /**
@@ -85,8 +85,8 @@ public class Missile extends GameObject implements CollisionVisitor
     /**
      * Tell visitor that it has collided with a missile.
      */
-    public void collidedWith(CollisionVisitor visitor) {
-        visitor.collidedWithMissile(this);
+    public void collidedWith(MissileCommanderCollisionVisitor visitor) {
+        visitor.collidedWith(this);
     }
     
     /**
@@ -128,42 +128,42 @@ public class Missile extends GameObject implements CollisionVisitor
     }
     
     /**
-     *
+     * @param missile the Missile that this Missile collided with
      */
-    public void collidedWithMissile(GameObject go) {
-        if (go.getBoundingVolume().intersects(getBoundingVolume())) {
+    public void collidedWith(Missile missile) {
+        if (missile.getBoundingVolume().intersects(getBoundingVolume())) {
             explode();
-            Missile missile = (Missile) go;
             missile.explode();
         }
         
     }
     
     /**
-     *
+     * @param luftWaffe the LuftWaffe that the Missile Collided with
      */
-    public void collidedWithLuftWaffe(GameObject go) {
-        if (go.getBoundingVolume().intersects(getBoundingVolume())) {
+    public void collidedWith(LuftWaffe luftWaffe) {
+        if (luftWaffe.getBoundingVolume().intersects(getBoundingVolume())) {
             explode();
         }
     }
     
     /**
      *
+     * @param city
      */
-    public void collidedWithCity(GameObject go) {
-        if (go.getBoundingVolume().intersects(getBoundingVolume())) {
+    public void collidedWith(City city) {
+        if (city.getBoundingVolume().intersects(getBoundingVolume())) {
             explode();
-            City city = (City) go;
             city.destroy();
         }
     }
     
     /**
      *
+     * @param ground
      */
-    public void collidedWithGround(GameObject go) {
-        if (getBoundingVolume().intersects(go.getBoundingVolume()))
+    public void collidedWith(Ground ground) {
+        if (getBoundingVolume().intersects(ground.getBoundingVolume()))
             explode();
     }
 }
